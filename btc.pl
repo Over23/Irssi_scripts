@@ -18,8 +18,8 @@ sub on_msg {
         my $isprivate = !defined $channel;
         my $dst = $isprivate ? $nick : $channel;
 
-        return unless $message =~ s/^${cp}btc\s*([\d\.\,]+)$//;
-        my $kolik_das_czk = ( $1 ne "" ) ? $1 : 1;
+     return unless $message =~ s/^${cp}btc\s*(.*)$//; my $value         = $1; my
+     $kolik_das_czk = ( $value =~ /^\d[\d\.]*$/ ) ? $value : 1;
 
         # na pozadi se zeptej na 24 prumer BTC a aktualni kurz CZK vs USD [tady neni jiste, zda se ptam spravne stranky]
         my $addrBTC = "https://blockchain.info/q/24hrprice";
