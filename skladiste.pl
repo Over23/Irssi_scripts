@@ -7,11 +7,11 @@ use Text::Iconv;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '0.01';
+$VERSION = '0.9rc';
 %IRSSI = (
-    authors     => 'Petr Baudis',
+    authors     => 'Petr Baudis, edited by Tomas Petru',
     name        => 'skladiste',
-    description => 'Interface to skladnik',
+    description => 'Interface to skladnik - parse web page, UTF-8 answers',
     license     => 'BSD',
 );
 
@@ -32,16 +32,8 @@ sub on_msg {
 		$t = 0;
 	}
 
-	# Fetch the web page
-	#my $page = qx/wget --dns-timeout=5 --connect-timeout=10 --read-timeout=10 -t 1 -q -O - $addr | cstocs il2 utf8/;
-
 	my $page = qx/wget --dns-timeout=7 --connect-timeout=11 --read-timeout=10 -t 1 -q -O - $addr/;
-	#if(not $page)
-	#{
-	#	$server->send_message($dst, "$nick: Dvere skladiste jsou zamcene. Zevnitr slysis podivne zvuky a nahle se citis velice nesvuj.", 0);
-	#	return;
-	#}
-
+	
 	if ($t) {
 		my ($pos, $lev) = ($page =~ m#<p>Pozice <span title=".*?">(.+?)</span>, (.+?). police</p>#i);
 		if(not $pos or not $lev)
@@ -70,8 +62,6 @@ sub on_msg {
  my $strEncoded = $converter->convert ( $str );
  $server->send_message ( $dst, $nick . ": " . $strEncoded, 0 );
 
-
-#	$server->send_message($dst, "$nick: $str", 0);
 }
 
 Irssi::signal_add('message public', 'on_msg');
