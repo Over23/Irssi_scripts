@@ -4,11 +4,11 @@ use Irssi;
 
 use vars qw($VERSION %IRSSI);
 
-$VERSION = '0.02';
+$VERSION = '0.9rc';
 %IRSSI = (
-    authors     => 'Overdrive, edited by Peterbay',
+    authors     => 'Overdrive, edited by Peterbay, https://labka.cz',
     name        => 'btc',
-    description => 'btc bastl',
+    description => 'Tell me actul rate BTC-USD, CZK-USD, nCZK-nBTC',
     license     => 'BSD',
 );
 
